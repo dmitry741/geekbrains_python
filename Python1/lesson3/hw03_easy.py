@@ -12,13 +12,13 @@ def my_round(number, ndigits):
     s = str(number)
     ls = s.split('.')
 
-    if len(ls) < 2: # перед нами целое число
+    if len(ls) < 2:  # перед нами целое число
         return number    
 
-    head = int(ls[0]) # целая часть
-    tail = ls[1] # дробная часть как целое число
+    head = int(ls[0])  # целая часть
+    tail = ls[1]  # дробная часть как целое число
 
-    if len(tail) <= ndigits: # число и так содержит не больше знаков после запятой чем требуется
+    if len(tail) <= ndigits:  # число и так содержит не больше знаков после запятой чем требуется
         return number
     
     last_digit = tail[ndigits:ndigits + 1]
@@ -29,7 +29,7 @@ def my_round(number, ndigits):
     else:
         result = head
 
-    if int(last_digit) >=5:
+    if int(last_digit) >= 5:
         a = 1 / 10 ** ndigits
         result += a
 

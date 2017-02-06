@@ -31,8 +31,15 @@ class my_geo_helper:
 
         return math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
 
-    def square(self, point1, point2, point3):
-        pass
+
+    @staticmethod
+    def triangle_square(point1, point2, point3):
+        a = distance(point1, point2)
+        b = distance(point2, point3)
+        c = distance(point3, point1)
+        p = (a + b + c) / 2
+
+        return math.sqrt(p * (p - a) * (p - b) * (p - c))
         
 
 class my_base_figure:
@@ -46,6 +53,9 @@ class my_base_figure:
 
     def GetPoint(self, index):
         return self.points[index]
+
+    def Square(self):
+        pass
 
     def Perimetr(self):
         d = 0
@@ -67,9 +77,7 @@ class my_triangle(my_base_figure):
         my_base_figure.__init__(self)
         my_base_figure.AddPoint(self, point1)
         my_base_figure.AddPoint(self, point2)
-        my_base_figure.AddPoint(self, point3)                
-
-    def square
+        my_base_figure.AddPoint(self, point3)
 
     def to_string(self):
         print("I am a my_triangle)")

@@ -29,7 +29,10 @@ class my_geo_helper:
         x2 = point2.GetX()
         y2 = point2.GetY()
 
-        return math.sqrt((x2 - x1) * (x2 - x1) - (y2 - y1) * (y2 - y1))
+        return math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+
+    def square(self, point1, point2, point3):
+        pass
         
 
 class my_base_figure:
@@ -48,14 +51,16 @@ class my_base_figure:
         d = 0
         i = 0
                          
-        while i < self.points.count():
-            d += my_geo_helper.distance(self.points[i], self.points[i + 1])
+        while i < len(self.points):
+            point1 = self.points[i]
+            point2 = self.points[(i + 1) % len(self.points)]
+            d += my_geo_helper.distance(point1, point2)
             i += 1
 
         return d
 
 class my_triangle(my_base_figure):
-    ''' class my_triangle is based on my_base_figure
+    ''' class my_triangle is based on my_base_figure. It is a triangle.
     '''
 
     def __init__(self, point1, point2, point3):
@@ -64,6 +69,7 @@ class my_triangle(my_base_figure):
         my_base_figure.AddPoint(self, point2)
         my_base_figure.AddPoint(self, point3)                
 
+    def square
 
     def to_string(self):
         print("I am a my_triangle)")
@@ -76,7 +82,7 @@ point2 = my_point(1, 0)
 point3 = my_point(0, 1)
 
 tr = my_triangle(point1, point2, point3)
-print(tr.GetPoint(1).GetX())
+print(tr.Perimetr())
 
 
 # Задача-2: Написать Класс "Равнобочная трапеция", заданной координатами 4-х точек.

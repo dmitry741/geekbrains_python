@@ -1,56 +1,56 @@
 import math
 
-class my_point:
+
+class MyPoint:
     ''' class point (X and Y)
     '''
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-    def GetX(self):
+    def get_x(self):
         return self.x
 
-    def GetY(self):
+    def get_y(self):
         return self.y
 
     def to_string(self):
         print("I am a point ({}, {})".format(self.x, self.y))
 
-class my_geo_helper:
+
+class MyGeoHelper:
     ''' class my_geo_helper allows to calculate some
     base properties for geometrical figures. 
     '''
     @staticmethod
     def distance(point1, point2):
-        x1 = point1.GetX()
-        y1 = point1.GetY()
-        x2 = point2.GetX()
-        y2 = point2.GetY()
+        x1 = point1.get_x()
+        y1 = point1.get_y()
+        x2 = point2.get_x()
+        y2 = point2.get_y()
 
         return math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
 
-
     @staticmethod
     def triangle_square(point1, point2, point3):
-        a = my_geo_helper.distance(point1, point2)
-        b = my_geo_helper.distance(point2, point3)
-        c = my_geo_helper.distance(point3, point1)
+        a = MyGeoHelper.distance(point1, point2)
+        b = MyGeoHelper.distance(point2, point3)
+        c = MyGeoHelper.distance(point3, point1)
         p = (a + b + c) / 2
 
         return math.sqrt(p * (p - a) * (p - b) * (p - c))
 
-
     @staticmethod
     def is_collinear(point1, point2, point3, point4):
-        x1 = point1.GetX()
-        y1 = point1.GetY()
-        x2 = point2.GetX()
-        y2 = point2.GetY()
+        x1 = point1.get_x()
+        y1 = point1.get_y()
+        x2 = point2.get_x()
+        y2 = point2.get_y()
 
-        x3 = point3.GetX()
-        y3 = point3.GetY()
-        x4 = point4.GetX()
-        y4 = point4.GetY()
+        x3 = point3.get_x()
+        y3 = point3.get_y()
+        x4 = point4.get_x()
+        y4 = point4.get_y()
         
         ax = x2 - x1
         ay = y2 - y1
@@ -60,31 +60,31 @@ class my_geo_helper:
         return (ax * by - bx * ay) == 0
         
 
-class my_base_figure:
+class MyBaseFigure:
     ''' class my_base_figure is base for all geometrical figures
     '''
     def __init__(self):
         self.points = []
 
-    def AddPoint(self, point):
+    def add_point(self, point):
         self.points.append(point)
 
-    def GetPoint(self, index):
+    def get_point(self, index):
         return self.points[index]
 
-    def Square(self):
+    def square(self):
         if len(self.points) < 3:
             return 0
 
         s = 0
         index1, index2, index3 = 0, 1, 2
-        point1 = self.GetPoint(index1)
+        point1 = self.get_point(index1)
         
         while True:            
-            point2 = self.GetPoint(index2)
-            point3 = self.GetPoint(index3)
+            point2 = self.get_point(index2)
+            point3 = self.get_point(index3)
 
-            s += my_geo_helper.triangle_square(point1, point2, point3)
+            s += MyGeoHelper.triangle_square(point1, point2, point3)
 
             index2 += 1
             index3 += 1
@@ -94,14 +94,14 @@ class my_base_figure:
 
         return s        
 
-    def Perimetr(self):
+    def perimetr(self):
         d = 0
         i = 0
                          
         while i < len(self.points):
             point1 = self.points[i]
             point2 = self.points[(i + 1) % len(self.points)]
-            d += my_geo_helper.distance(point1, point2)
+            d += MyGeoHelper.distance(point1, point2)
             i += 1
 
         return d
@@ -110,15 +110,15 @@ class my_base_figure:
 # Задача-1: Написать класс для фигуры-треугольника, заданного координатами трех точек.
 # Определить методы, позволяющие вычислить: площадь, высоту и периметр фигуры.
 
-class my_triangle(my_base_figure):
+class MyTriangle(MyBaseFigure):
     ''' class my_triangle is based on my_base_figure. It is a triangle.
     '''
 
     def __init__(self, point1, point2, point3):
-        my_base_figure.__init__(self)
-        my_base_figure.AddPoint(self, point1)
-        my_base_figure.AddPoint(self, point2)
-        my_base_figure.AddPoint(self, point3)
+        MyBaseFigure.__init__(self)
+        MyBaseFigure.add_point(self, point1)
+        MyBaseFigure.add_point(self, point2)
+        MyBaseFigure.add_point(self, point3)
 
     def to_string(self):
         print("I am a my_triangle)")
@@ -128,30 +128,53 @@ class my_triangle(my_base_figure):
 #  Предусмотреть в классе методы: проверка, является ли фигура равнобочной трапецией;
 #  вычисления: длины сторон, периметр, площадь.
 
-class my_isosceles_trapeze(my_base_figure):
+class MyIsoscelesTrapeze(MyBaseFigure):
     ''' class my_isosceles_trapeze is based on my_base_figure. It is a isosceles trapeze.
     '''
     def __init__(self, point1, point2, point3, point4):
-        my_base_figure.__init__(self)
-        my_base_figure.AddPoint(self, point1)
-        my_base_figure.AddPoint(self, point2)
-        my_base_figure.AddPoint(self, point3)
-        my_base_figure.AddPoint(self, point4)
+        MyBaseFigure.__init__(self)
+        MyBaseFigure.add_point(self, point1)
+        MyBaseFigure.add_point(self, point2)
+        MyBaseFigure.add_point(self, point3)
+        MyBaseFigure.add_point(self, point4)
 
     def is_correct(self):
         if len(self.points) != 4:
             return False
 
-        point1 = my_base_figure.GetPoint(0)
-        point2 = my_base_figure.GetPoint(1)
-        point3 = my_base_figure.GetPoint(2)
-        point4 = my_base_figure.GetPoint(3)
+        point1 = MyBaseFigure.get_point(self, 0)
+        point2 = MyBaseFigure.get_point(self, 1)
+        point3 = MyBaseFigure.get_point(self, 2)
+        point4 = MyBaseFigure.get_point(self, 3)
 
         ls =[]
         
-        ls.append(my_geo_helper.is_collinear(point1, point2, point3, point4))
-        ls.append(my_geo_helper.distance(point1, point2) == my_geo_helper.distance(point3, point4))
+        ls.append(MyGeoHelper.is_collinear(point2, point3, point1, point4))
+        ls.append(MyGeoHelper.distance(point1, point2) == MyGeoHelper.distance(point3, point4))
 
         return all(ls)
-                  
 
+    def to_string(self):
+        print("I am a MyIsoscelesTrapeze)")
+
+point1 = MyPoint(0, 0)
+point2 = MyPoint(0, 1)
+point3 = MyPoint(1, 0)
+
+triangle = MyTriangle(point1, point2, point3)
+print("Площадь треугольника = ", triangle.square())
+print("Периметр треугольника = ", triangle.perimetr())
+
+point1 = MyPoint(0, 0)
+point2 = MyPoint(1, 1)
+point3 = MyPoint(2, 1)
+point4 = MyPoint(3, 0)
+
+trapeze = MyIsoscelesTrapeze(point1, point2, point3, point4)
+print("Площадь трапеции = ", trapeze.square())
+print("Периметр трапеции = ", trapeze.perimetr())
+
+if trapeze.is_correct():
+    print("Это равнобедренная трапеция")
+else:
+    print("Это НЕ равнобедренная трапеция или вообще не трапеция")

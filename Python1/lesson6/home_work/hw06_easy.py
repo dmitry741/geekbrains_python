@@ -5,17 +5,20 @@ class MyPoint:
     ''' class point (X and Y)
     '''
     def __init__(self, x, y):
-        self.x = x
-        self.y = y
+        self._x = x
+        self._y = y
 
     def get_x(self):
-        return self.x
+        return self._x
 
     def get_y(self):
-        return self.y
+        return self._y
 
     def to_string(self):
-        print("I am a point ({}, {})".format(self.x, self.y))
+        print("I am a point ({}, {})".format(self._x, self._y))
+
+    def __repr__(self):
+        return "I am a point X = {} Y = {}".format(self._x, self._y)
 
 
 class MyGeoHelper:
@@ -70,8 +73,17 @@ class MyBaseFigure:
         self.points.append(point)
 
     def get_point(self, index):
-        return self.points[index]
 
+        point = MyPoint(0, 0)
+        
+        try:
+            point = self.points[index]
+        except IndexError:
+            print("Index is out of range.")
+            
+        return point
+
+    @property
     def square(self):
         if len(self.points) < 3:
             return 0
@@ -94,6 +106,7 @@ class MyBaseFigure:
 
         return s        
 
+    @property
     def perimetr(self):
         d = 0
         i = 0
@@ -162,8 +175,8 @@ point2 = MyPoint(0, 1)
 point3 = MyPoint(1, 0)
 
 triangle = MyTriangle(point1, point2, point3)
-print("Площадь треугольника = ", triangle.square())
-print("Периметр треугольника = ", triangle.perimetr())
+print("Площадь треугольника = ", triangle.square)
+print("Периметр треугольника = ", triangle.perimetr)
 
 point1 = MyPoint(0, 0)
 point2 = MyPoint(1, 1)
@@ -171,8 +184,8 @@ point3 = MyPoint(2, 1)
 point4 = MyPoint(3, 0)
 
 trapeze = MyIsoscelesTrapeze(point1, point2, point3, point4)
-print("Площадь трапеции = ", trapeze.square())
-print("Периметр трапеции = ", trapeze.perimetr())
+print("Площадь трапеции = ", trapeze.square)
+print("Периметр трапеции = ", trapeze.perimetr)
 
 if trapeze.is_correct():
     print("Это равнобедренная трапеция")

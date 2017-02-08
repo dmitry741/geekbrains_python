@@ -14,10 +14,7 @@ class MyPoint:
     def get_y(self):
         return self._y
 
-    def to_string(self):
-        print("I am a point ({}, {})".format(self._x, self._y))
-
-    def __repr__(self):
+    def __str__(self):
         return "I am a point X = {} Y = {}".format(self._x, self._y)
 
 
@@ -133,7 +130,7 @@ class MyTriangle(MyBaseFigure):
         MyBaseFigure.add_point(self, point2)
         MyBaseFigure.add_point(self, point3)
 
-    def to_string(self):
+    def __str__(self):
         print("I am a my_triangle)")
 
 
@@ -167,7 +164,7 @@ class MyIsoscelesTrapeze(MyBaseFigure):
 
         return all(ls)
 
-    def to_string(self):
+    def __str__(self):
         print("I am a MyIsoscelesTrapeze)")
 
 point1 = MyPoint(0, 0)

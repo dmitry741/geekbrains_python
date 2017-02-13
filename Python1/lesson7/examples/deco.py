@@ -9,14 +9,31 @@ def log(func):
         print('{}({},{}) = {}'.format(func.__name__, args, kwargs, res))
         return res
         
-    return decorated    
+    return decorated
+
+def mylog(func):
+    def decorated(*args, **kwargs):
+        print('call Begin method')
+        res = func(*args, **kwargs)                                             
+        print('call End method =', res)
+        return res
+        
+    return decorated
 
 
 @log        # <- применение декоратора аналогично записи:  my_sum = log(my_sum)  
 def my_sum(a, b):
     res = a + b
     return res
+
+@mylog
+def my_mul(a, b):
+    return a * b
+    
     
 
 # print(my_sum(5,7))    
 my_sum(5,7)
+print(my_mul(3, 8))
+
+

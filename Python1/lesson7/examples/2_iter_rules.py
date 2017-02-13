@@ -22,6 +22,9 @@ print("Итерируем вручную...")
 test_list_iter = iter(test_list)
 # Функция iter() просто вызывает метод __iter__()
 
+for x in iter(test_list):
+    print(x)
+
 print(next(test_list_iter))
 print(next(test_list_iter))
 print(next(test_list_iter))
